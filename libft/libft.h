@@ -16,6 +16,10 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdint.h>
+# include <stdarg.h>
 
 typedef struct s_list
 {
@@ -35,7 +39,7 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 void	*ft_memset(void *s, int c, size_t n);
-char	*ft_strchr(const char *s, const char *str);
+char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
@@ -66,6 +70,65 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-void    ft_handle_error(char *error_msg);
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1000
+# endif
+
+char	*ft_full(char *remain, int fd);
+char	*ft_get_line(char *remain);
+char	*ft_left(char *remain);
+char	*get_next_line(int fd);
+char	*ft_strjoin_gnl(char *s1, char *s2);
+
+typedef struct s_flags
+{
+	int		left;
+	int		zero;
+	int		space;
+	int		plus;
+	int		hash;
+	int		precision;
+	int		width;
+	int		dot;
+	int		error;
+	char	type;
+}				t_flags;
+
+int		ft_put_char(int c);
+int		ft_printchar(t_flags flags, int c);
+int		ft_printstr(t_flags flags, char *str);
+int		ft_putstr(char *str);
+int		ft_printstr_left(t_flags flags, char *str);
+int		ft_printstr_no_left(t_flags flags, char *str);
+int		ft_formats(va_list args, const char *format);
+int		ft_printf(const char *format, ...);
+int		ft_print_ptr(t_flags flags, unsigned long int ptr);
+void	ft_put_ptr_left(t_flags flags, unsigned long int ptr, int length);
+void	ft_put_ptr_no_left(t_flags flags, unsigned long int ptr, int length);
+void	ft_put_ptr(unsigned long int ptr);
+int		ft_print_int(t_flags flags, long n);
+int		ft_print_int_body(t_flags flags, long n);
+void	ft_put_hex(unsigned int num, const char format);
+int		ft_print_hex(t_flags flags, unsigned int num, const char format);
+int		ft_print_hex_body(t_flags flags, unsigned int n, const char format);
+int		ft_ptrlen(unsigned long int ptr);
+int		ft_nbrlen(long n);
+void	ft_putnbr(long n);
+t_flags	ft_reset_flags(void);
+t_flags	ft_set_flags(t_flags flags, const char *format);
+t_flags	ft_set_format(t_flags flags, const char *format);
+int		ft_print_all(t_flags flags, va_list args);
+int		ft_padding(t_flags flags, long n, int (*f)());
+int		ft_padding_count(t_flags flags, long n, int (*f)());
+int		ft_print_unsigned(t_flags flags, unsigned int n);
+t_flags	ft_set_flags_wp(t_flags flags, const char *format);
+t_flags	ft_flags_check_error(t_flags flags);
+int		ft_printstr_null(t_flags flags, char *str);
+int		ft_printstr_null_pointer(t_flags flags);
+int		ft_hexlen(unsigned long int n);
+char	*ft_strchr_printf(const char *s, const char *str);
+
+void	ft_handle_error(char *error_msg);
 
 #endif

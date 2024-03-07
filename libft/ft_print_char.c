@@ -1,31 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_print_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luyang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/31 14:36:56 by luyang            #+#    #+#             */
-/*   Updated: 2023/10/31 14:44:00 by luyang           ###   ########.fr       */
+/*   Created: 2023/11/21 14:23:42 by luyang            #+#    #+#             */
+/*   Updated: 2023/11/21 14:23:44 by luyang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/*#include <stdio.h>*/
+
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_put_char(int c)
 {
-	size_t	len;
-
-	len = 0;
-	if (!s)
-		return (0);
-	while (*s++)
-		len++;
-	return (len);
+	write (1, &c, 1);
+	return (1);
 }
 
-/*int	main(void)
+int	ft_printchar(t_flags flags, int c)
 {
-	printf("%zu", ft_strlen(""));
-	return (0);
-}*/
+	int	len;
+
+	len = flags.width;
+	if (len)
+	{
+		if (flags.left)
+		{
+			ft_put_char(c);
+			while (--len)
+				ft_put_char(' ');
+		}
+		else
+		{
+			while (--len)
+				ft_put_char(' ');
+			ft_put_char(c);
+		}
+		return (flags.width);
+	}
+	return (ft_put_char(c));
+}

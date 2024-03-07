@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luyang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/31 14:36:56 by luyang            #+#    #+#             */
-/*   Updated: 2023/10/31 14:44:00 by luyang           ###   ########.fr       */
+/*   Created: 2023/11/28 15:59:44 by luyang            #+#    #+#             */
+/*   Updated: 2023/11/28 15:59:46 by luyang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/*#include <stdio.h>*/
+
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_print_unsigned(t_flags flags, unsigned int n)
 {
-	size_t	len;
+	int	length;
 
-	len = 0;
-	if (!s)
-		return (0);
-	while (*s++)
-		len++;
-	return (len);
+	length = 0;
+	flags.plus = 0;
+	flags.space = 0;
+	if (!(flags.error && n == 0))
+	{
+		if (flags.left)
+			length += ft_print_int_body(flags, (long)n);
+		length += ft_padding(flags, n, ft_nbrlen);
+		if (!flags.left)
+			length += ft_print_int_body(flags, (long)n);
+	}
+	else
+		length += ft_padding(flags, n, ft_nbrlen);
+	return (length);
 }
-
-/*int	main(void)
-{
-	printf("%zu", ft_strlen(""));
-	return (0);
-}*/

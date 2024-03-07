@@ -1,31 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luyang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/31 14:36:56 by luyang            #+#    #+#             */
-/*   Updated: 2023/10/31 14:44:00 by luyang           ###   ########.fr       */
+/*   Created: 2023/11/09 13:20:46 by luyang            #+#    #+#             */
+/*   Updated: 2023/11/09 13:20:48 by luyang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/*#include <stdio.h>*/
+
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+char	*ft_strjoin_gnl(char *s1, char *s2)
 {
-	size_t	len;
+	char	*ret;
+	size_t	i;
 
-	len = 0;
-	if (!s)
-		return (0);
-	while (*s++)
-		len++;
-	return (len);
+	if (!s1)
+	{
+		s1 = malloc (sizeof(char));
+		s1[0] = '\0';
+	}
+	if (!s1 || !s2)
+		return (NULL);
+	ret = malloc (sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!ret)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		ret[i] = s1[i];
+		i++;
+	}
+	while (*s2)
+		ret[i++] = *s2++;
+	ret[i] = '\0';
+	free(s1);
+	return (ret);
 }
-
-/*int	main(void)
-{
-	printf("%zu", ft_strlen(""));
-	return (0);
-}*/
