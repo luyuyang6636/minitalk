@@ -5,18 +5,27 @@ In this program, I wrote code for 2 programs - **server** and **client**.
 
 The server must be started first. After launch it will display its PID like this:
 
-![image](https://github.com/luyuyang6636/minitalk/assets/78044757/5da362b7-17ac-4575-b950-90fd6a9e8a19)
+![image](https://github.com/luyuyang6636/minitalk/assets/78044757/e562f176-ac82-4c1d-a435-522ebb3d2bae)
 
 The client will take **2 parameters**
 1. ther server PID (which was displayed after the launch of the server).
 2. A string to send to the server.
 
-![image](https://github.com/luyuyang6636/minitalk/assets/78044757/8d4bd1b5-0b48-493b-8b9f-b6398151e03f)
+![image](https://github.com/luyuyang6636/minitalk/assets/78044757/a5f0f4a9-c440-47ff-ae1f-afb65cb71702)
+
+
+![image](https://github.com/luyuyang6636/minitalk/assets/78044757/1929ff68-bf16-4da2-9f11-a4e82b675bf8)
 
 
 ### Functionality
 - The client must **send the string** passed as a parameter to the server. Once the string has been received, **the server must print it**.
 - The server will be able to receive strings from several clients in a row without needing to restart.
+
+![image](https://github.com/luyuyang6636/minitalk/assets/78044757/4366473e-1a88-4014-a12f-684aa7db062b)
+
+![image](https://github.com/luyuyang6636/minitalk/assets/78044757/2db4445f-3c2e-431f-a8d7-a682d98879ac)
+
+
 - The communication between the client and the server has to be done only using two UNIX signals: `SIGUSR1` and `SIGUSR2`.
 - The server acknowledges every message received by sending back a signal to the client.
 
